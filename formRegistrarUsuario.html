@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>App Clinica Estetica</title>
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      	<!--Import materialize.css-->
+      	<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+      	<!--Import jQuery before materialize.js-->
+      	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      	<script type="text/javascript" src="js/materialize.min.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <!--<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+       <script type="text/javascript" src="js/js.js"></script>-->
+        <link type="text/css" rel="stylesheet" href="css/estilo.css"/>	
+		<script>
+				window.onload = function()
+		{
+			$("#btnRegistrar").click(enviar);
+		}
+
+		function enviar() { 
+		  var cedula=$("#cedula").val(); 
+		  var nombre=$("#nombre").val(); 
+		  var apellidos=$("#apellidos").val(); 
+		  var telefono=$("#telefono").val();
+		  var direccion=$("#direccion").val();  
+		  var email=$("#email").val(); 
+
+		  $.ajax({ 
+		  async:true,  
+		  type: "POST", 
+		  dataType: "html", contentType: "application/x-www-form-urlencoded", 
+		  url:"https://nanis1122013.000webhostapp.com/estetica/registrarUsuario.php, 
+		  data:"cedula="+cedula+"&nombre="+nombre+"&apellidos="+apellidos+"&telefono="+telefono+"&direccion="+direccion+"&email="+email, beforeSend:inicioEnvio, success:llegadaDatos, 
+		  timeout:4000, 
+		  error:problemas }); 
+		  return false; 
+		} 
+
+		 function inicioEnvio()
+        {
+            $("#textoPantalla").text('se han enviado los datos');
+        }
+
+        function llegadaDatos(datos)
+        {
+            $("#textoPantalla").text(datos);
+                       
+        }
+
+        function problemas()
+        {
+            $("#textoPantalla").text('Problemas en el servidor.');
+        }
+
+		</script>	
+	</head>
+	<body>
+
+<nav class="color" >
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo right">Clínica Estética</a>
+      <ul class="left on-med-and-down">
+        <li><a href="usuario.html">USUARIO</a></li>
+        <li><a href="servicios.html">SERVICIOS</a></li>
+      </ul>
+    </div>
+  </nav>
+		
+	<h1 class="titulo">Registrar Usuario</h1>
+
+	
+      <form id=registrarUsuario>
+        <div class="input-field">
+          <i class="material-icons prefix">perm_identity</i>
+          <input id="cedula" name="cedula" type="text" class="validate" required="required" >
+          <label for="icon_prefix">Cédula</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">account_circle</i>
+          <input  id="nombre" name="nombre" type="text" class="validate" required="required" >
+          <label for="icon_prefix">Nombre</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">account_circle</i>
+          <input  id="apellidos" name="apellidos" type="text" class="validate" required="required" >
+          <label for="icon_prefix">Apellidos</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">phone</i>
+          <input  id="telefono" name="telefono" type="text" class="validate" required="required" >
+          <label for="icon_telephone">Telefono</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">business</i>
+          <input  id="direccion" name="direccion" type="text" class="validate" required="required" >
+          <label for="icon_telephone">Dirección</label>
+        </div>
+ 		   <div class="input-field">
+          <i class="material-icons prefix">email</i>
+          <input  id="email" name="email" type="text" class="validate" required="required" >
+          <label for="icon_telephone">Email</label>
+        </div>
+     
+	
+    <div class="center col-sm-12">
+      <br /><center><button type="button" id="btnRegistrar" class="btn waves-effect waves-light">Registrar</button></center>
+    </div>
+
+    </form>
+    <br>
+  <div id="textoPantalla">  
+  </div>
+ 
+
+
+					
+	</body>
+</html>

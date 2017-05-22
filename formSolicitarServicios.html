@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>App Clinica Estetica</title>
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      	<!--Import materialize.css-->
+      	<link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+      	<!--Import jQuery before materialize.js-->
+      	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      	<script type="text/javascript" src="js/materialize.min.js"></script>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width">
+        <!--<script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+       <script type="text/javascript" src="js/js.js"></script>-->
+        <link type="text/css" rel="stylesheet" href="css/estilo.css"/>	
+   		<script>
+            $(document).ready(function (){
+               $('select').material_select(); 
+            });
+        </script>
+        <script>$('select').material_select('destroy'); </script>
+
+		<script>
+				window.onload = function()
+		{
+			$("#btnRegistrar").click(enviar);
+		}
+
+		function enviar() { 
+      var nombreusuario=$("#nombreusuario").val();
+		  var tipo=$("#tipo").val(); 
+		  var nombreser=$("#nombreser").val(); 
+		  var nota=$("#nota").val(); 
+		  
+	
+
+		  $.ajax({ 
+		  async:true,  
+		  type: "POST", 
+		  dataType: "html", contentType: "application/x-www-form-urlencoded", 
+		  url:"https://nanis1122013.000webhostapp.com/estetica/registrarSolicitud.php", 
+		  data:"nombreusuario="+nombreusuario+"&tipo="+tipo+"&nombreser="+nombreser+"&nota="+nota, beforeSend:inicioEnvio, success:llegadaDatos, 
+		  timeout:4000, 
+		  error:problemas }); 
+		  return false; 
+		} 
+
+		 function inicioEnvio()
+        {
+            $("#textoPantalla").text('se han enviado los datos');
+        }
+
+        function llegadaDatos(datos)
+        {
+            $("#textoPantalla").text(datos);
+                       
+        }
+
+        function problemas()
+        {
+            $("#textoPantalla").text('Problemas en el servidor.');
+        }
+
+		</script>	
+	</head>
+	<body>
+
+<nav class="color" >
+    <div class="nav-wrapper">
+      <a href="#!" class="brand-logo right">Clínica Estética</a>
+      <ul class="left on-med-and-down">
+        <li><a href="usuario.html">USUARIO</a></li>
+        <li><a href="servicios.html">SERVICIOS</a></li>
+      </ul>
+    </div>
+  </nav>
+		
+	<h1 class="titulo">Solicitar Servicio</h1>
+
+	
+      <form id=solicitarServicio>
+
+      <div class="input-field">
+          <i class="material-icons prefix">account_circle</i>
+          <input  id="nombreusuario" name="nombreusuario" type="text" class="validate" required="required" >
+          <label for="icon_prefix">Nombre Usuario</label>
+        </div>
+
+       <div class="input-field">
+       <i class="material-icons prefix">shop_two</i>
+    	<select id="tipo" name="tipo">
+      		<option value="" disabled selected>Seleccione el tipo</option>
+      		<option value="1">Depilación</option>
+      		<option value="2">Dermatologia</option>
+      		<option value="3">Masajes</option>
+      		<option value="3">Rejuvenecimiento</option>
+    	</select>	
+  		</div>
+
+        <div class="input-field">
+          <i class="material-icons prefix">assignment_ind</i>
+          <input id="nombreser" name="nombreser" type="text" class="validate" required="required" >
+          <label for="icon_prefix">Nombre Servicio</label>
+        </div>
+        <div class="input-field">
+          <i class="material-icons prefix">description</i>
+          <input  id="nota" name="nota" type="text" class="validate" required="required" >
+          <label for="icon_prefix">Nota</label>
+        </div>
+       
+       
+ 		 
+     
+	
+    <div class="center col-sm-12">
+      <br /><center><button type="button" id="btnRegistrar" class="btn waves-effect waves-light">Solicitar</button></center>
+    </div>
+
+    </form>
+    <br>
+  <div id="textoPantalla">  
+  </div>
+  <br>
+        <div class="center" align="center">
+            <a class="volver" href="servicios.html">volver</a>
+         </div>
+
+					
+	</body>
+</html>
